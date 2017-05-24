@@ -27,7 +27,7 @@ Or, build directly via source:
 
 ```console
 $ git clone https://github.com/AnujanM/xbiggest.git $GOPATH/src/github.com/AnujanM/xbiggest
-$ cd $_ # $GOPATH/src/github.com/AnujanM/xbiggest
+$ cd $GOPATH/src/github.com/AnujanM/xbiggest
 $ make
 $ ./xbiggest
 ```
