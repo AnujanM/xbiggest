@@ -29,23 +29,13 @@ func (a SizeSorterDes) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a SizeSorterDes) Less(i, j int) bool { return a[i].size > a[j].size }
 
 func parse(folders string) []string{
+	//Converts a string of directories into an array
 	data := strings.Split(folders, ",")
 	for i, d := range data {
 		data[i] = strings.Trim(d, " ")
 	}
 	return data
 }
-
-// func getSmallest(t []file) int{
-// 	smallestSize := t[0].size
-// 	var index int
-// 	for i, _ := range t{
-// 		if (t[i].size < smallestSize){
-// 			index = i
-// 		}
-// 	}
-// 	return index
-// }
 
 func addFile(path string, size int64, t []file) {
 	//small := getSmallest(t)
@@ -57,21 +47,25 @@ func addFile(path string, size int64, t []file) {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Expected query.")
+		fmt.Println("Expected directory to search.")
 		os.Exit(1)
 	}
 	input := os.Args[1]
 
+	var numberOfFiles int
+
 	if len(os.Args) == 2 {
-		numberOfFiles := 10
+		numberOfFiles = 10
 	}else{
-		numberOfFiles, err := strconv.Atoi(os.Args[2])
+		num, err := strconv.Atoi(os.Args[2])
 		if err != nil {
-			fmt.Println("Number of ")
+			fmt.Println("Number of files not valid")
 			log.Fatal(err)
+		}else{
+			numberOfFiles = num
 		}
 	}
-	
+
 	top := make([]file, numberOfFiles)
 
 	usr, err := user.Current()
