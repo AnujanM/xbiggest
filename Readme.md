@@ -18,9 +18,9 @@ Requires Go to be [installed](https://golang.org/doc/install) and [configured](h
 Install with `go get`:
 
 ```console
-$ go get -u -v github.com/AnujanM/fsql/...
-$ which fsql
-$GOPATH/bin/fsql
+$ go get -u -v github.com/AnujanM/xbiggest/...
+$ which xbiggest
+$GOPATH/bin/xbiggest
 ```
 
 Or, build directly via source:
@@ -72,7 +72,7 @@ Before submitting code, please ensure your changes comply with [Golint](https://
 
 ## Credits
 
-Inspired by [kshvmdn](https://github.com/kshvmdn) ([fsql](https://github.com/kshvmdn/fsql)
+Inspired by [kshvmdn](https://github.com/kshvmdn) ([fsql](https://github.com/kshvmdn/fsql))
 
 ## License
 
