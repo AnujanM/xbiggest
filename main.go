@@ -88,14 +88,10 @@ func main() {
 
 			addFile(path, info.Size(), top)
 
-			// fmt.Printf("%s, %d", path, info.Size())
-			// fmt.Printf("\n")
-
 			return nil
 		})
 	}
 
-	//fmt.Println(getSmallest(top))
 	sort.Sort(SizeSorterDes(top))
 	for _, thing := range top {
 		fmt.Printf("%d, %s", thing.size, thing.path)
