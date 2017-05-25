@@ -22,23 +22,7 @@ func (a SizeSorterAsc) Len() int           { return len(a) }
 func (a SizeSorterAsc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a SizeSorterAsc) Less(i, j int) bool { return a[i].size < a[j].size }
 
-type SizeSorterDes []file
-
-func (a SizeSorterDes) Len() int           { return len(a) }
-func (a SizeSorterDes) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a SizeSorterDes) Less(i, j int) bool { return a[i].size > a[j].size }
-
-func parse(folders string) []string{
-	//Converts a string of directories into an array
-	data := strings.Split(folders, ",")
-	for i, d := range data {
-		data[i] = strings.Trim(d, " ")
-	}
-	return data
-}
-
 func addFile(path string, size int64, t []file) {
-	//small := getSmallest(t)
 	sort.Sort(SizeSorterAsc(t))
 	if (t[0].size < size){
 		t[0] = file{path, size}
@@ -50,20 +34,17 @@ func main() {
 		fmt.Println("Expected directory to search.")
 		os.Exit(1)
 	}
-	input := os.Args[1]
 
 	var numberOfFiles int
+	var input []string
 
-	if len(os.Args) == 2 {
+	num, err := strconv.Atoi(os.Args[1])
+	if err != nil {
 		numberOfFiles = 10
+		input = os.Args[1:]
 	}else{
-		num, err := strconv.Atoi(os.Args[2])
-		if err != nil {
-			fmt.Println("Number of files not valid")
-			log.Fatal(err)
-		}else{
-			numberOfFiles = num
-		}
+		numberOfFiles = num
+		input = os.Args[2:]
 	}
 
 	top := make([]file, numberOfFiles)
@@ -73,14 +54,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	q := parse(input)
-	for i, src := range q {
+	for i, src := range input {
 		if strings.Contains(src, "~") {
-			q[i] = filepath.Join(usr.HomeDir, src[1:])
+			input[i] = filepath.Join(usr.HomeDir, src[1:])
 		}
 	}
 
-	for _, source := range q {
+	for _, source := range input {
 		filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 			if path == "." || path == ".." || err != nil {
 				return nil
@@ -92,9 +72,8 @@ func main() {
 		})
 	}
 
-	sort.Sort(SizeSorterDes(top))
-	for _, thing := range top {
-		fmt.Printf("%d, %s", thing.size, thing.path)
+	for i, _ := range top {
+		fmt.Printf("%d, %s", top[len(top)-i-1].size, top[len(top)-i-1].path)
 		fmt.Printf("\n")
 	}
 }

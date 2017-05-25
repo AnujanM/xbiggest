@@ -34,34 +34,34 @@ $ ./xbiggest
 
 ## Usage
 
-Pass your query to xbiggest via command line argument. View the usage dialogue with the `-help` flag.
+Pass your query to xbiggest via command line argument.
 
 ```sh
-$ xbiggest Directories [number of files]
-$ xbiggest "~, ~Documents"
-$ xbiggest "~, ~Documents" 25
+$ xbiggest [number of files] Directories 
+$ xbiggest 25 ~ ~Documents
+$ xbiggest ~ ~Documents
 ```
 
 ### Query syntax
 
-Every query needs at least 1 directory to search through, the number of files returned can be set on the third argument or the default is 10
+Every query needs at least 1 directory to search through, the number of files returned can be set on the first argument or the default is 10
 
 #### Source
 
-Each source should be a relative or absolute path to some directory on your machine. Use ~ for your Home Directory.
+Each source should be a relative or absolute path to some directory on your machine. Use ~ for your Home Directory. Seperate directories with spaces
 
 ##### Examples
 
 ```sh
-$ xbiggest "." 
+$ xbiggest . 
 ```
 
 ```sh
-$ xbiggest "~/Desktop"
+$ xbiggest ~/Desktop
 ```
 
 ```sh
-$ xbiggest "~/Desktop, $GOPATH"
+$ xbiggest ~/Desktop $GOPATH
 ```
 
 ## Contribute
